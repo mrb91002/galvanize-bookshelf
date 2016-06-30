@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 exports.seed = function(knex) {
   return knex('authors').del()
     .then(() => {
