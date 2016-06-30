@@ -16,7 +16,7 @@ router.get('/books', (req, res, next) => {
 
 router.get('/books/:id', (req, res, next) => {
 
-  if (Number.isNan(id)) {
+  if (Number.isNaN(req.params.id)) { //previously just had id
     return next();
   }
 
