@@ -2,18 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const knex = require('knex');
+const knex = require('../knex');
 const bcrypt = require('bcrypt');
-
-const auth = function(req, res, next) {
-  if (!req.session.user) {
-    return res.sendStatus(401);
-  }
-  next();
-}
-
-
-
 
 router.post('/session', (req, res, next) => {
   knex('users')
@@ -36,7 +26,8 @@ router.post('/session', (req, res, next) => {
         }
 
         res.cookie('loggedIn', true);
-        req.session.user = user;
+        // req.session.user = user;
+        req.session.userId = user.id;
         res.sendStatus(200);
       });
     })

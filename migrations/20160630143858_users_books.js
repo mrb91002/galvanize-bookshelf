@@ -8,13 +8,14 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .references('id')
       .inTable('books')
-      .onDelete('CASCADE');
+      .onDelete('CASCADE')
+      .index();
     table
       .integer('user_id')
       .notNullable()
       .references('id')
       .inTable('users')
-      .onDelete();
+      .onDelete('CASCADE');
     table.timestamps(true, true);
   });
 };
