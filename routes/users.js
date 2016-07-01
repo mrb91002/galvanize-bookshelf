@@ -6,6 +6,14 @@ const knex = require('../knex');
 
 const bcrypt = require('bcrypt');
 
+const auth = function(req, res, next) {
+  if (!req.session.user) {
+    return res.sendStatus(401);
+  }
+  next();
+}
+
+// Create a user if one doesn't already exist.
 router.post('/users', (req, res, next) => {
   const userInfo = req.body;
 
@@ -40,7 +48,7 @@ router.post('/users', (req, res, next) => {
             hashed_password: hashed_password
           })
           .then((users) => {
-            res.send(200);
+            res.sendStatus(200);
           })
           .catch((err) => {
             next(err);
@@ -51,5 +59,9 @@ router.post('/users', (req, res, next) => {
       next(err);
     });
   });
+
+
+
+
 
 module.exports = router;
